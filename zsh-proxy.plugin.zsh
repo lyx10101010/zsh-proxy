@@ -244,7 +244,9 @@ __enable_proxy() {
 		__disable_proxy_all
 		__disable_proxy_git
 		__disable_proxy_npm
-		__disable_proxy_apt
+		if sudo -n true 2>/dev/null; then
+			__disable_proxy_apt
+		fi
 		echo "Done!"
 		echo "----------------------------------------"
 		echo "Enable proxy for:"
@@ -255,7 +257,10 @@ __enable_proxy() {
 		# npm & yarn & pnpm"
 		__enable_proxy_npm
 		# apt"
-		__enable_proxy_apt
+		if sudo -n true 2>/dev/null; then
+			echo "- apt"
+			__enable_proxy_apt
+		fi
 		echo "Done!"
 	fi
 }
@@ -264,7 +269,9 @@ __disable_proxy() {
 	__disable_proxy_all
 	__disable_proxy_git
 	__disable_proxy_npm
-	__disable_proxy_apt
+	if sudo -n true 2>/dev/null; then
+		__disable_proxy_apt
+	fi
 }
 
 __auto_proxy() {
