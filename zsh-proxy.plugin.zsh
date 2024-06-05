@@ -237,7 +237,7 @@ __enable_proxy() {
 		__disable_proxy_all
 		__disable_proxy_git
 		__disable_proxy_npm
-		if sudo -n true 2>/dev/null; then
+		if groups $USER | grep -q '\bsudo\b'; then
 			__disable_proxy_apt
 		fi
 		echo "Done!"
@@ -250,7 +250,7 @@ __enable_proxy() {
 		# npm & yarn & pnpm"
 		__enable_proxy_npm
 		# apt"
-		if sudo -n true 2>/dev/null; then
+		if groups $USER | grep -q '\bsudo\b'; then
 			echo "- apt"
 			__enable_proxy_apt
 		fi
@@ -262,7 +262,7 @@ __disable_proxy() {
 	__disable_proxy_all
 	__disable_proxy_git
 	__disable_proxy_npm
-	if sudo -n true 2>/dev/null; then
+	if groups $USER | grep -q '\bsudo\b'; then
 		__disable_proxy_apt
 	fi
 }
